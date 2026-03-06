@@ -1,0 +1,2 @@
+n_clusters,n_total,n_informal_wage,se_triple,estimated_beta,mde_80,mde_90,needed_clusters,needed_informal,power_actual,gap_closed_pct
+32,73435,4144,0.036,-0.042,0.10085706785206686,0.11669455980304755,91,11696,0.2146864191512579,60.86956521739131

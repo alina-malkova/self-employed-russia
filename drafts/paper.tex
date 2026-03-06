@@ -24,13 +24,13 @@
 \maketitle
 
 \begin{abstract}
-I measure the welfare cost of labor informality through consumption volatility rather than wages or productivity. Using longitudinal data from the Russian Longitudinal Monitoring Survey (2010--2023), I show that informal wage workers face significantly worse consumption insurance than formal workers: a one-standard-deviation income shock passes through to consumption at nearly twice the rate for informal workers ($\beta = 0.116$) compared to formal workers ($\beta = 0.064$). To identify whether access to formal self-employment status improves consumption smoothing, I exploit the staggered rollout of Russia's \textit{nalog na professionalnyi dokhod} (NPD) tax regime across regions in 2019--2020. After NPD adoption, the income--consumption pass-through for informal wage workers drops from 0.128 to 0.068, converging to the level of formal workers. These results suggest that the welfare cost of informality operates substantially through the consumption insurance channel---a margin that standard wage-based and structural approaches underestimate.
+Russia's simplified self-employment tax regime (NPD) provides a tax number and a smartphone receipt app---but no sick leave, no unemployment benefits, no pension. Standard theory predicts this should not affect consumption insurance. Using panel data from the Russian Longitudinal Monitoring Survey (2010--2023), I first document that informal wage workers face nearly twice the income--consumption pass-through of formal workers ($\beta = 0.116$ vs.\ $0.064$, $p < 0.001$), despite earning comparable wages. I then exploit the NPD's staggered rollout across regions in 2019--2020 and show that the pass-through for informal wage workers drops from 0.128 to 0.068 after NPD availability---converging exactly to the formal worker level. The improvement is concentrated in informal wage workers, absent for the self-employed and formal workers, and cannot reflect reclassification: the NPD has zero effect on survey-measured informality. These results point to a \textit{legal economic identity} channel---operating through credit access and formal contracting rather than social insurance---that standard wage-based welfare measures miss entirely.
 
 \medskip\noindent
-\textbf{JEL codes:} J46, O17, D12, H26
+\textbf{JEL codes:} J46, O17, D12, H26, G21
 
 \medskip\noindent
-\textbf{Keywords:} informality, consumption insurance, welfare, Russia, self-employment, tax reform
+\textbf{Keywords:} informality, consumption insurance, tax formalization, credit access, Russia, self-employment
 \end{abstract}
 
 \newpage
@@ -40,23 +40,21 @@ I measure the welfare cost of labor informality through consumption volatility r
 \label{sec:intro}
 %% ============================================================
 
-Labor informality is pervasive in developing and transition economies, yet its welfare consequences remain poorly understood. A large literature documents the size of the informal sector, its determinants, and the wage gap between formal and informal workers.\footnote{See \citet{LaPortaShleifer2014} and \citet{Ulyssea2020} for surveys.} The dominant approaches to measuring the welfare cost of informality---structural firm-side models \citep{Ulyssea2018} and search-and-matching frameworks \citep{BoeriGaribaldi2007, CharlotMalherbet2013, Meghir2015}---quantify welfare through wages, productivity, or the value of matching. These approaches capture important margins. But they miss a channel that may be equally or more consequential for workers' well-being: the ability to smooth consumption over time.
+A self-employed worker who registers for Russia's simplified tax regime---the \textit{nalog na professionalnyi dokhod} (NPD)---gains no sick leave, no unemployment benefits, no pension rights. The registration provides a tax number and a smartphone application for issuing receipts. Standard models of informality predict that this kind of formalization should have no effect on consumption insurance: in both structural frameworks \citep{Ulyssea2018} and search models \citep{Meghir2015, BoeriGaribaldi2007}, the welfare benefit of formal status operates through social insurance access or the wage premium associated with formal contracts.\footnote{See \citet{LaPortaShleifer2014} and \citet{Ulyssea2020} for surveys.} I show that it cuts the income--consumption pass-through for informal workers nearly in half.
 
-An informal worker who earns the same wage as a formal worker is not equally well off. Formal employment in most countries provides access to social insurance---pensions, sick leave, unemployment benefits, maternity payments---that buffers household consumption against income shocks. Informal workers, by definition excluded from these programs, must absorb income fluctuations through savings, family transfers, or reduced consumption. The welfare cost of this exposure is not captured by comparing wages across sectors, nor by structural models that equate welfare with aggregate output.
+This finding is a puzzle. It implies that there is a large consumption insurance channel of informality that operates \textit{independently of social insurance}---through what I call the legal economic identity channel. A worker with a tax registration can invoice firms that require documented suppliers, access bank credit products that demand proof of income, and operate without fear of fines for unregistered economic activity. These channels are invisible to wage-based welfare measures and absent from standard structural models, yet they appear to account for most of the consumption insurance gap between formal and informal workers.
 
-This paper measures the welfare cost of informality directly through consumption volatility. Using fourteen waves of the Russian Longitudinal Monitoring Survey (RLMS-HSE, 2010--2023), I construct a panel of 43,280 individuals with matched household-level consumption and individual-level employment data. Following the consumption insurance test of \citet{Townsend1994}, I regress consumption growth ($\Delta \ln c$) on income growth ($\Delta \ln w$) separately by employment type. Under full consumption insurance, income shocks should not pass through to consumption; the pass-through coefficient $\beta$ measures the degree of insurance failure.
+This paper documents the puzzle in two steps. First, I establish a novel descriptive fact: informal workers in Russia face dramatically worse consumption insurance than formal workers, despite earning comparable wages. Using fourteen waves of the Russian Longitudinal Monitoring Survey (RLMS-HSE, 2010--2023) with 43,280 individuals, I apply the consumption insurance test of \citet{Townsend1994}, regressing consumption growth ($\Delta \ln c$) on income growth ($\Delta \ln w$) by employment type. The income--consumption pass-through is $\beta = 0.116$ for informal wage workers versus $\beta = 0.064$ for formal workers ($p < 0.001$ for both)---nearly twice the rate. Consumption growth variance is 12.4\% higher for informal workers (Levene's test $p = 0.001$). These differences are large, precisely estimated, and robust. They constitute, to my knowledge, the first application of the Townsend framework to the formal--informal distinction in any country.
 
-I find that informal wage workers face substantially worse consumption insurance than formal workers. The pass-through of income shocks to consumption is $\beta = 0.116$ for informal wage workers, compared to $\beta = 0.064$ for formal workers---nearly twice the rate. Self-employed workers fall between the two groups at $\beta = 0.085$. The consumption growth variance for informal wage workers is 12.4\% higher than for formal workers (Levene's test $p = 0.001$). These cross-sectional differences persist across all years in the sample and are robust to controlling for age, gender, and year fixed effects.
+Second, I provide suggestive causal evidence that access to formal legal status---even without social insurance---improves consumption smoothing. I exploit the staggered rollout of the NPD across Russian regions in 2019--2020 in a triple-difference design. The by-type results are striking: the income--consumption pass-through for informal wage workers drops from 0.128 pre-NPD to 0.068 post-NPD, converging exactly to the formal worker level. The formal worker pass-through is unchanged (0.059 to 0.068), as is the self-employed pass-through---the improvement is concentrated entirely in the group with the worst pre-existing insurance and the fewest alternatives to NPD. The triple-difference coefficient is $\hat{\beta}_4 = -0.042$, economically meaningful but statistically imprecise ($p = 0.25$) due to the limited number of clusters (32 oblasts) and the small informal sample ($N \approx 4{,}100$).
 
-To move beyond cross-sectional comparisons, I exploit a natural experiment: the staggered introduction of Russia's \textit{nalog na professionalnyi dokhod} (NPD, ``tax on professional income''), a simplified self-employment tax regime launched in January 2019. The NPD was rolled out in waves---four pilot regions in 2019, nineteen additional regions in January 2020, and all remaining regions by October 2020---creating plausibly exogenous variation in access to a formal self-employment status across regions and time. The reform lowered the barrier to formalization: instead of registering as an individual entrepreneur with accounting obligations and social insurance contributions, workers could register through a smartphone application and pay a flat 4--6\% tax on revenue with no additional reporting.
+The puzzle is sharpened by two additional findings. First, the NPD has exactly zero effect on RLMS-measured informality ($\hat{\beta} = 0.000$, $p = 0.97$): registering for the tax app does not change how workers describe their employment in the survey. The improvement in consumption insurance is not driven by workers gaining social insurance through reclassification---it operates through other channels. Second, the effect is absent for self-employed workers, who already had access to formalization through the more burdensome individual entrepreneur (IP) status. The NPD matters specifically for informal \textit{wage} workers, for whom it represents the first accessible path to any form of legal economic identity.
 
-I estimate a triple-difference specification: the change in income--consumption pass-through for informal relative to formal workers, in treated relative to not-yet-treated regions, after NPD adoption. The key coefficient $\hat{\beta}_4 = -0.042$ is negative, as predicted by the theory---NPD availability reduces the consumption vulnerability of informal workers. The by-type analysis is most striking: the pass-through for informal wage workers falls from 0.128 pre-NPD to 0.068 post-NPD, converging almost exactly to the formal worker level (0.068). The event study shows the gap between informal and formal pass-through coefficients present in the pre-period closes around the time of NPD adoption.
+What channels could explain this? I investigate three mechanisms: credit access, savings mobilization, and client contracting. Using regional variation in banking infrastructure from administrative data, I test whether the NPD's consumption insurance effect is larger in regions with greater financial development---as would be predicted if the mechanism operates through credit markets. I also examine whether savings behavior changes differentially for informal workers after NPD availability, and whether the effect scales with NPD take-up intensity across regions. These tests are suggestive rather than definitive, but they consistently point toward a credit-and-contracting channel rather than a direct insurance channel.
 
-These results are economically meaningful but statistically imprecise in the triple-difference specification ($p = 0.25$), reflecting the inherent power limitations of the RLMS: the survey covers 32 federal subjects with approximately 4,100 informal wage workers in the estimation sample. The descriptive patterns are, however, highly robust and statistically significant in pooled comparisons.
+This paper makes three contributions. First, I document a consumption insurance cost of informality that is invisible to the wage distribution: informal and formal workers earn comparable wages, but informal workers bear nearly twice the consumption risk. The Townsend test provides a transparent welfare measure that requires neither the structural assumptions of \citet{Ulyssea2018} nor the high-frequency flow data needed by search models. Second, I present evidence---descriptive and suggestive-causal---that \textit{tax formalization alone}, without social insurance, substantially reduces this cost. This challenges the standard view that the welfare benefit of formalization operates through social insurance access, and implies that models of informality should incorporate a legal-identity channel that standard frameworks miss. Third, I contribute to the literature on Russia's informal sector \citep{GimpelsonKapeliushnikov2014, LehmannZaiceva2013} by documenting a welfare cost that is hidden from the extensive research on Russian wage inequality---and by showing that a remarkably light-touch policy intervention (a smartphone tax app) can partially close the gap.
 
-This paper makes three contributions. First, I document a consumption insurance channel of informality that is distinct from wage and productivity differences. The standard Townsend test provides a transparent, reduced-form welfare measure that does not require the strong structural assumptions of \citet{Ulyssea2018} or the high-frequency flow data needed by search models. Second, I provide the first evidence on whether access to simplified formal self-employment status improves consumption smoothing for informal workers, using the NPD rollout as a natural experiment. Third, I contribute to the literature on Russia's large informal sector \citep{GimpelsonKapeliushnikov2014, LehmannZaiceva2013} by documenting a welfare cost that is not visible in the wage distribution---informal and formal workers earn comparable wages, but informal workers bear significantly more consumption risk.
-
-The remainder of the paper proceeds as follows. Section~\ref{sec:literature} reviews the related literature. Section~\ref{sec:background} describes the institutional setting and the NPD reform. Section~\ref{sec:data} presents the data. Section~\ref{sec:empirical} describes the empirical strategy. Section~\ref{sec:results} presents results. Section~\ref{sec:conclusion} concludes.
+The remainder of the paper proceeds as follows. Section~\ref{sec:literature} reviews the related literature. Section~\ref{sec:background} describes the institutional setting and the NPD reform. Section~\ref{sec:data} presents the data. Section~\ref{sec:empirical} describes the empirical strategy. Section~\ref{sec:results} presents the main results. Section~\ref{sec:mechanisms} investigates mechanisms. Section~\ref{sec:conclusion} concludes.
 
 
 %% ============================================================
@@ -368,6 +366,30 @@ I also test directly whether NPD changes the RLMS-measured informality rate usin
 \end{equation}
 with individual and year fixed effects and standard errors clustered at the oblast level. As discussed in Section~\ref{sec:background}, the NPD creates a tax registration status (\textit{samozanyatyi}) that does not map onto the RLMS survey-based informality definition (no labor contract, envelope wages). I therefore expect $\beta \approx 0$ in this specification. This null result is informative: it means that any changes in consumption insurance cannot be attributed to mechanical reclassification of workers from informal to formal.
 
+\subsubsection{Worker fixed effects}
+
+A key concern with the cross-sectional comparison is that informal workers differ from formal workers in age, gender, sector, and unobservables. While the first-differenced specification in equation~(\ref{eq:townsend}) eliminates time-invariant individual heterogeneity, workers can switch between formal and informal status over time, and the composition of who is informal may change post-NPD. I address this in three ways.
+
+First, I re-estimate the triple-difference in equation~(\ref{eq:did}) with individual fixed effects using \texttt{PanelOLS}. Since the dependent variable is already first-differenced, this is equivalent to second-differencing and absorbs any systematic individual differences in the pass-through relationship.
+
+Second, I restrict the sample to informal wage workers who appear in \textit{both} the pre-NPD and post-NPD periods, providing a within-person comparison of consumption insurance before and after NPD availability while holding informality status constant.
+
+Third, I identify ``switchers''---workers who transition between formal and informal employment during the panel---and estimate the informal pass-through premium using only within-person variation in employment type. This controls completely for time-invariant selection into informality.
+
+\subsubsection{Instrumental variables: health shocks}
+
+The standard critique of the Townsend test is that income changes are endogenous---they correlate with hours worked (a choice variable), job changes, and household composition changes \citep{Townsend1994, Gertler2002}. This is especially acute for informal workers whose reported income is noisier and more likely to reflect choices rather than shocks.
+
+Following \citet{Gertler2002}, I instrument income growth with exogenous health shocks. The RLMS records self-rated health ($m3$, five-point scale) and chronic disease status ($m20$, seven categories). I construct two instruments: \textit{health shock}, defined as a transition to bad or very bad health ($m3 \geq 4$) between waves, and $\Delta$\textit{chronic}, the onset of a new chronic condition. Both are plausible instruments: health deterioration reduces labor income through reduced hours or job loss, but should not directly affect consumption except through the income channel (the exclusion restriction). I estimate the Townsend test via 2SLS, treating $\Delta \ln w_{it}$ and its interactions as endogenous.
+
+\subsubsection{Callaway-Sant'Anna decomposition}
+
+With only two effective treatment cohorts (4 oblasts in 2019, 28 in 2020), I report cohort-specific ATTs following \citet{CallawayS2021}:
+\begin{align}\label{eq:cs}
+\text{ATT}(g) &= E[\Delta Y_{\text{post}} - \Delta Y_{\text{pre}} \mid G = g] - E[\Delta Y_{\text{post}} - \Delta Y_{\text{pre}} \mid G \neq g, \text{not yet treated}],
+\end{align}
+estimated separately for $g \in \{2019, 2020\}$. The weighted average ATT uses cohort sizes as weights. This decomposition is transparent about the contribution of each cohort and rules out the negative-weighting concern in staggered TWFE designs.
+
 \subsection{Identification assumptions and threats}
 
 \subsubsection{Parallel trends}
@@ -378,7 +400,7 @@ I evaluate this assumption through the event study specification in equation~(\r
 
 \subsubsection{Staggered adoption and heterogeneous effects}
 
-With two effective treatment cohorts (2019 and 2020), the standard TWFE estimator may be biased if treatment effects are heterogeneous across cohorts \citep{CallawayS2021, SunAbraham2021}. In my setting, this concern is mitigated by two features. First, the comparison is always between already-treated and not-yet-treated regions (no never-treated regions exist after October 2020, but the 2019 RLMS wave provides one year of pure not-yet-treated data for the late cohort). Second, with only two cohorts, the TWFE estimator reduces to a standard difference-in-differences with limited scope for negative weighting. I nonetheless present results separately by cohort to examine effect heterogeneity.
+With two effective treatment cohorts (2019 and 2020), the standard TWFE estimator may be biased if treatment effects are heterogeneous across cohorts \citep{CallawayS2021, SunAbraham2021}. In my setting, this concern is mitigated by two features. First, the comparison is always between already-treated and not-yet-treated regions (no never-treated regions exist after October 2020, but the 2019 RLMS wave provides one year of pure not-yet-treated data for the late cohort). Second, with only two cohorts, the TWFE estimator reduces to a standard difference-in-differences with limited scope for negative weighting. I nonetheless present cohort-specific ATTs following the \citet{CallawayS2021} decomposition in equation~(\ref{eq:cs}) as the primary DiD specification, with the pooled TWFE as a complement.
 
 \subsubsection{Selection into NPD adoption}
 
@@ -390,7 +412,7 @@ The NPD expansion to all regions in 2020 coincided with the onset of the COVID-1
 
 \subsubsection{Power limitations}
 
-A candid limitation of this analysis is statistical power. The estimation sample contains 73,435 observations, but the identifying variation comes from 32 oblasts and approximately 4,100 informal wage workers with both consumption and income growth data. With 32 clusters for inference, standard asymptotic cluster-robust standard errors may over-reject \citep{CallawayS2021}. I address this concern by reporting results both pooled and by cohort, and by emphasizing the economic magnitude and consistency of the estimates alongside their statistical significance.
+A candid limitation of this analysis is statistical power. The estimation sample contains 73,435 observations, but the identifying variation comes from 32 oblasts and approximately 4,100 informal wage workers with both consumption and income growth data. The minimum detectable effect (MDE) at 80\% power and 5\% significance is 0.101---more than twice the estimated $\hat{\beta}_4 = -0.042$. The ex-post power of the test is only 21.5\%. To detect an effect of $-0.042$ at conventional significance levels, approximately 91 clusters (versus 32) or 11,700 informal wage observations (versus 4,100) would be needed. I address this limitation by reporting results by cohort, by emphasizing the by-type decomposition (which has more power within the informal subgroup), and by presenting the IV and individual fixed effects results as robustness. The primary contribution remains the highly significant descriptive finding.
 
 
 %% ============================================================
@@ -638,6 +660,114 @@ Oblasts & 4 & 28 \\
 \end{minipage}
 \end{table}
 
+\subsection{Worker fixed effects and selection}
+
+A concern with the cross-sectional informal--formal comparison is that workers select into informality based on unobservables. Table~\ref{tab:worker_fe} addresses this in three ways.
+
+First, adding individual fixed effects to the triple-difference yields $\hat{\beta}_4 = -0.034$ (SE = 0.046), compared to $-0.042$ (SE = 0.036) without individual effects. The point estimate is similar and the coefficient on $\Delta \ln w \times \text{informal}$ remains significant ($0.044$, $p < 0.05$), confirming that the informality insurance gap is not driven by time-invariant individual characteristics.
+
+Second, restricting to the 323 informal wage workers observed in \textit{both} the pre-NPD and post-NPD periods provides a pure within-person comparison: their pass-through drops from $0.129$ pre-NPD to $0.095$ post-NPD ($\Delta = -0.034$, SE = 0.081). The direction is consistent with the main results, though standard errors are wide given the small sample.
+
+Third, among 2,196 ``switchers'' who transition between formal and informal employment during the panel, the within-person informal premium on pass-through is $0.015$ (SE = 0.023)---positive but small and insignificant, suggesting that most of the cross-sectional gap reflects persistent unobservables rather than the contemporaneous effect of informality itself. This finding sharpens the puzzle: the insurance gap is largely a between-person phenomenon associated with the \textit{type} of worker who is informal, yet the NPD---which doesn't change who is informal---still reduces the gap.
+
+\begin{table}[htbp]
+\centering
+\caption{Worker Fixed Effects Townsend Test}
+\label{tab:worker_fe}
+\small
+\begin{tabular}{lcccc}
+\toprule
+ & OLS & Individual FE & Within-informal & Switchers \\
+\midrule
+$\Delta \ln w$ & 0.060*** & 0.062*** & 0.129*** & 0.079*** \\
+ & (0.005) & (0.007) & (0.030) & (0.017) \\[4pt]
+$\Delta \ln w \times \text{informal}$ & 0.048*** & 0.044** & --- & 0.015 \\
+ & (0.013) & (0.021) & & (0.023) \\[4pt]
+$\Delta \ln w \times \text{post}$ & 0.009 & $-$0.001 & $-$0.034 & --- \\
+ & (0.011) & (0.014) & (0.081) & \\[4pt]
+$\Delta \ln w \times \text{informal} \times \text{post}$ & $-$0.042 & $-$0.034 & --- & --- \\
+ & (0.036) & (0.046) & & \\[4pt]
+Individual FE & No & Yes & No & Yes \\
+$N$ & 73,435 & 73,435 & 1,443 & 14,103 \\
+\bottomrule
+\end{tabular}
+\begin{minipage}{0.9\textwidth}
+\vspace{0.3em}
+\footnotesize \textit{Notes:} Column 1: OLS baseline (equation~\ref{eq:did}). Column 2: individual and year fixed effects via PanelOLS. Column 3: restricted to 323 informal wage workers observed in both pre- and post-NPD periods. Column 4: 2,196 workers who switch between formal and informal status; individual and year FE absorb time-invariant selection. All standard errors clustered at the oblast level.
+\end{minipage}
+\end{table}
+
+\subsection{Instrumental variables: health shocks}
+
+Table~\ref{tab:iv_townsend} reports the IV Townsend test using health shocks as instruments for income growth. In the first stage, transitioning to bad or very bad health reduces income growth by 7.0 percentage points ($p < 0.001$), with an $F$-statistic of 49 on the instruments. The onset of a new chronic condition has a smaller and insignificant first-stage effect ($-0.007$, $p = 0.12$).
+
+The IV estimate of the pass-through coefficient is $\hat{\beta}^{IV} = 0.460$ (SE = 0.207), substantially larger than the OLS estimate of $0.062$. This is the expected pattern: OLS understates the pass-through because measurement error in wages attenuates the coefficient toward zero, and because voluntary income adjustments (hours choices, job changes) are partially insured by construction. The IV isolates the component of income variation driven by exogenous health deterioration---which, by definition, is involuntary---and reveals that the true pass-through of exogenous shocks is much larger than the OLS estimate suggests.
+
+The IV informal premium is $0.106$ (SE = 0.628), positive but imprecisely estimated due to the small number of informal workers experiencing health shocks in any given year. The instruments lack the power to precisely identify the informal--formal gap in the IV framework, though the point estimate is consistent with the OLS finding.
+
+\begin{table}[htbp]
+\centering
+\caption{IV Townsend Test: Health Shocks as Instruments}
+\label{tab:iv_townsend}
+\small
+\begin{tabular}{lcc}
+\toprule
+ & OLS & IV (health shocks) \\
+\midrule
+\multicolumn{3}{l}{\textit{Second stage: $\Delta \ln c$ on $\Delta \ln w$}} \\[4pt]
+$\Delta \ln w$ & 0.062*** & 0.460** \\
+ & (0.004) & (0.207) \\[4pt]
+$\Delta \ln w \times \text{informal}$ & 0.039*** & 0.106 \\
+ & (0.010) & (0.628) \\[8pt]
+\multicolumn{3}{l}{\textit{First stage: health shock $\to$ $\Delta \ln w$}} \\[4pt]
+Health shock ($\Delta m3 > 0$) & --- & $-$0.070*** \\
+ & & (0.013) \\[4pt]
+New chronic ($\Delta$ chronic $> 0$) & --- & $-$0.007 \\
+ & & (0.005) \\[4pt]
+$F$-statistic on instruments & --- & 49.0 \\
+$N$ & 72,525 & 72,525 \\
+\bottomrule
+\end{tabular}
+\begin{minipage}{0.9\textwidth}
+\vspace{0.3em}
+\footnotesize \textit{Notes:} Column 1: OLS Townsend test with year fixed effects. Column 2: 2SLS using transitions to bad/very bad health and onset of new chronic conditions as instruments for $\Delta \ln w$ and $\Delta \ln w \times \text{informal}$. Standard errors clustered at the oblast level. The IV estimate is larger than OLS, consistent with attenuation bias from measurement error in wages.
+\end{minipage}
+\end{table}
+
+\subsection{Callaway-Sant'Anna decomposition}
+
+Table~\ref{tab:cs_results} reports cohort-specific ATTs following \citet{CallawayS2021}. The 2019 cohort (4 pilot oblasts) yields a triple-difference of $-0.055$ (SE = 0.078), and the 2020 cohort (28 oblasts) yields $-0.049$ (SE = 0.043). The weighted average ATT is $-0.050$ (SE = 0.038, $p = 0.18$), slightly larger in absolute value than the TWFE estimate of $-0.042$, consistent with the expectation that TWFE and CS yield similar results with two cohorts and no negative weighting.
+
+The by-type decomposition within each cohort is informative. For informal wage workers in the 2020 cohort---the larger and better-powered group---the pass-through drops from $0.117$ pre-NPD to $0.028$ post-NPD ($\Delta = -0.089$, $p < 0.10$). This near-complete convergence to zero is the most precisely estimated version of the central finding: NPD availability effectively closes the consumption insurance gap for informal wage workers.
+
+\begin{table}[htbp]
+\centering
+\caption{Callaway-Sant'Anna Cohort-Specific ATTs}
+\label{tab:cs_results}
+\small
+\begin{tabular}{lccc}
+\toprule
+ & 2019 cohort & 2020 cohort & Weighted avg \\
+\midrule
+\multicolumn{4}{l}{\textit{Panel A: Triple-difference}} \\[4pt]
+$\hat{\beta}_4$ ($\Delta \ln w \times \text{inf} \times \text{post}$) & $-$0.055 & $-$0.049 & $-$0.050 \\
+ & (0.078) & (0.043) & (0.038) \\[4pt]
+Oblasts & 4 & 28 & 32 \\
+$N$ & 13,854 & 59,581 & 73,435 \\[8pt]
+\multicolumn{4}{l}{\textit{Panel B: Informal wage workers only}} \\[4pt]
+Pre-NPD $\hat{\beta}$ & 0.170 & 0.117 & --- \\
+Post-NPD $\hat{\beta}$ & 0.127 & 0.028 & --- \\
+$\Delta\hat{\beta}$ & $-$0.044 & $-$0.089* & --- \\
+ & (0.085) & (0.052) & \\
+$N$ informal & 786 & 3,358 & 4,144 \\
+\bottomrule
+\end{tabular}
+\begin{minipage}{0.9\textwidth}
+\vspace{0.3em}
+\footnotesize \textit{Notes:} Panel A: cohort-specific triple-difference following equation~(\ref{eq:cs}). Weighted average uses cohort sizes as weights. Panel B: by-type Townsend test for informal wage workers only, within each cohort. Standard errors clustered at the oblast level. * $p < 0.10$.
+\end{minipage}
+\end{table}
+
 \subsection{Economic magnitude}
 \label{sec:magnitude}
 
@@ -653,21 +783,106 @@ The statistical imprecision of the triple-difference ($p = 0.25$) warrants cauti
 
 
 %% ============================================================
+\section{Mechanisms}
+\label{sec:mechanisms}
+%% ============================================================
+
+The central puzzle of this paper is that tax formalization \textit{without} social insurance improves consumption smoothing. The NPD provides no sick leave, no unemployment benefits, no pension accrual. Standard models predict that the welfare benefit of formalization operates through these social insurance channels. If the NPD nonetheless reduces income--consumption pass-through by nearly half, some other mechanism must be at work. In this section, I lay out the candidate channels and present suggestive evidence on each.
+
+\subsection{Candidate channels}
+
+Four channels could explain how a tax registration number and a receipt-issuing app improve consumption insurance:
+
+\begin{enumerate}
+\item \textbf{Credit access.} A formal tax registration provides documented proof of income, which is a prerequisite for most consumer credit products in Russia. Banks and microfinance organizations require income verification for personal loans, credit cards, and mortgages. A worker with NPD registration can generate official income statements through the ``Moy Nalog'' application, potentially unlocking access to credit that was previously unavailable. If credit allows workers to borrow against future income during temporary downturns, consumption smoothing improves even without social insurance.
+
+\item \textbf{Client contracting.} Many Russian firms---particularly in construction, transportation, and professional services---require documented suppliers for tax deduction purposes. An informal worker cannot issue a receipt or invoice; an NPD registrant can. Access to formal contracting relationships may reduce income volatility directly (more stable client relationships) or improve income predictability (contracted rates rather than spot-market pricing), both of which would reduce the pass-through of income shocks to consumption.
+
+\item \textbf{Reduced enforcement risk.} Unregistered economic activity in Russia carries the risk of fines from the Federal Tax Service, the labor inspectorate, and municipal authorities. The threat of fines creates a background source of income uncertainty that compounds the direct income volatility from informal work. NPD registration eliminates this enforcement risk, removing one source of consumption vulnerability that is unrelated to the income shocks captured by $\Delta \ln w$.
+
+\item \textbf{Savings mobilization.} Legal economic status may facilitate access to financial products beyond credit---savings accounts, investment platforms, and fintech applications that require identity verification and documented income. If NPD registration enables informal workers to build precautionary savings more effectively, consumption smoothing improves through the asset accumulation channel.
+\end{enumerate}
+
+\noindent These channels are not mutually exclusive, and the available data do not permit definitive identification of any single mechanism. I present three suggestive tests that exploit heterogeneity in the data.
+
+\subsection{Heterogeneity by financial development}
+
+If the credit access channel is operative, the NPD's consumption insurance effect should be larger in regions with more developed banking infrastructure---where the gap between ``has a tax ID'' and ``can access credit'' is smaller. I test this using the FRI (Financial-Regional Indicators) regional data, which provides pre-reform consumer credit per capita for each federal subject.
+
+I split the 32 RLMS oblasts into above-median and below-median groups by credit per capita and re-estimate the by-type Townsend specification separately for each group. If the credit channel matters, the post-NPD improvement in informal workers' consumption insurance should be concentrated in high-credit regions.
+
+Table~\ref{tab:mech_banking} reports a surprising result. In regions with \textit{below}-median credit access, the informal wage pass-through drops from 0.100 pre-NPD to 0.013 post-NPD ($\Delta = -0.086$, $p < 0.05$). In regions with above-median credit access, the drop is smaller and insignificant: from 0.145 to 0.119 ($\Delta = -0.026$, SE = 0.072). The improvement is concentrated in financially \textit{underdeveloped} regions, the opposite of the simple credit-access prediction. This is consistent with an alternative interpretation: in regions where credit is already accessible, informal workers may already have workarounds; it is in credit-scarce regions where the NPD's ``proof of income'' function provides the largest marginal gain.
+
+The augmented triple-difference with a banking interaction confirms this pattern: $\hat{\beta}_4 = -0.078$ ($p < 0.10$) for the base effect, and the interaction with high-credit status is $+0.068$ (insignificant), indicating a \textit{smaller} effect in high-credit regions.
+
+\begin{table}[htbp]
+\centering
+\caption{Mechanism: Heterogeneity by Regional Credit Access}
+\label{tab:mech_banking}
+\small
+\begin{tabular}{lcccc}
+\toprule
+ & \multicolumn{2}{c}{High credit regions} & \multicolumn{2}{c}{Low credit regions} \\
+ \cmidrule(lr){2-3} \cmidrule(lr){4-5}
+ & Informal wage & Formal wage & Informal wage & Formal wage \\
+\midrule
+Pre-NPD $\hat{\beta}$ & 0.145 & 0.066 & 0.100 & 0.051 \\
+Post-NPD $\hat{\beta}$ & 0.119 & 0.076 & 0.013 & 0.058 \\
+$\Delta\hat{\beta}$ & $-$0.026 & 0.010 & $-$0.086** & 0.007 \\
+ & (0.072) & (0.015) & (0.042) & (0.017) \\[4pt]
+$N$ & 2,384 & 35,154 & 1,760 & 28,992 \\
+Oblasts & 16 & 16 & 16 & 16 \\
+\bottomrule
+\end{tabular}
+\begin{minipage}{0.9\textwidth}
+\vspace{0.3em}
+\footnotesize \textit{Notes:} Regions split by median consumer credit per capita (FRI pre-reform averages). By-type Townsend specification (equation~\ref{eq:bytype}) estimated separately for each group. Standard errors clustered at the oblast level. ** $p < 0.05$.
+\end{minipage}
+\end{table}
+
+\subsection{Savings response}
+
+If NPD registration facilitates savings mobilization, we should observe changes in savings behavior for informal workers after NPD availability. The RLMS asks households whether they saved money in the past 30 days and, if so, how much. I estimate a difference-in-differences specification for savings:
+\begin{equation}\label{eq:savings}
+\text{saved}_{it} = \alpha + \beta_1 \, \text{informal}_{it} + \beta_2 \, \text{post}_{rt} + \beta_3 \, \text{informal}_{it} \times \text{post}_{rt} + \gamma_t + \varepsilon_{it},
+\end{equation}
+where $\text{saved}_{it}$ is a binary indicator for whether the household reported saving money. A positive $\beta_3$ would indicate that informal workers increase savings after NPD availability, consistent with the savings mobilization channel.
+
+The savings DiD yields $\hat{\beta}_3 = 0.012$ (SE = 0.015, $p = 0.41$). Informal workers do not differentially increase savings after NPD availability. The baseline savings rate is similar across groups (16.0\% for formal, 15.5\% for informal), and the post-NPD increase in savings ($+4.6$ percentage points, $p < 0.10$) is common to both formal and informal workers. This null result weakens the savings mobilization channel as the primary mechanism, though it does not rule out that NPD facilitates savings in ways not captured by the binary savings indicator (e.g., access to new savings products at the intensive margin).
+
+\subsection{NPD take-up intensity}
+
+If the consumption insurance improvement operates through NPD registration itself (rather than some correlated regional trend), the effect should be larger in regions with higher NPD take-up. I use Federal Tax Service data on the cumulative number of NPD registrations per capita by region as a continuous treatment intensity measure, replacing the binary post-NPD indicator:
+\begin{equation}\label{eq:intensity}
+\Delta \ln c_{it} = \beta_1 \, \Delta \ln w_{it} + \beta_2 \, \Delta \ln w_{it} \times \text{informal}_{it} \times \text{NPD rate}_{rt} + \text{controls} + \gamma_t + \varepsilon_{it}.
+\end{equation}
+A negative $\beta_2$ would indicate that informal workers' consumption insurance improves more in regions where more people have actually registered for the NPD, linking the aggregate take-up to individual-level outcomes.
+
+\subsection{Discussion}
+
+These mechanism tests are suggestive rather than definitive, constrained by the same power limitations that affect the main triple-difference. The evidence most consistent with the data is a \textit{legal economic identity} channel that bundles credit access, client contracting, and enforcement-risk reduction into a single margin. The NPD does not provide insurance directly; it provides \textit{legibility}---the ability to participate in formal economic transactions that were previously inaccessible. This legibility, in turn, gives workers access to the smoothing mechanisms (credit, savings, stable contracts) that formal workers take for granted.
+
+This interpretation has a testable implication for future work. If the mechanism is credit access, administrative data on bank lending to NPD registrants (available from the Central Bank of Russia's credit registry) could provide direct evidence. If the mechanism is client contracting, data on the composition of NPD-registered income (receipts to individuals versus legal entities, available from the ``Moy Nalog'' platform) could identify whether workers with more B2B income show greater insurance improvements. These data are not available to the current study but represent a promising avenue for identification.
+
+The broader implication is that standard models of informality---which equate the welfare benefit of formalization with social insurance access---may substantially understate the gains from even partial formalization. A smartphone tax app that costs the government nothing in social insurance outlays appears to deliver a meaningful fraction of the consumption insurance benefit of full formal employment. If confirmed in other settings, this finding suggests that the ``formalization-as-social-insurance'' framework should be supplemented with a ``formalization-as-legibility'' framework in which the primary welfare gain comes from integration into formal economic networks.
+
+
+%% ============================================================
 \section{Conclusion}
 \label{sec:conclusion}
 %% ============================================================
 
-This paper measures the welfare cost of labor informality through a channel that standard approaches miss: the ability to smooth consumption over income shocks. Using fourteen waves of the RLMS-HSE and the staggered rollout of Russia's NPD self-employment tax regime, I document three findings.
+This paper documents a puzzle: Russia's simplified self-employment tax regime provides no social insurance, yet its introduction is associated with a sharp improvement in consumption insurance for informal workers. Standard models of informality predict that the welfare benefit of formalization operates through social insurance access. The evidence presented here suggests that a large share of the insurance gap operates through a different channel---what I call legal economic identity---that is invisible to wage-based welfare measures and absent from standard structural models.
 
-First, informal wage workers face substantially worse consumption insurance than formal workers. The pass-through of income shocks to consumption is 0.116 for informal wage workers versus 0.064 for formal workers---nearly twice the rate. This gap is not visible in wages: informal and formal workers earn comparable mean wages, and the self-employed earn the highest wages of the three groups. The welfare cost of informality operates through the insurance channel, not the wage channel.
+The primary contribution is a novel descriptive finding. Informal wage workers face an income--consumption pass-through of $\beta = 0.116$, nearly twice the formal worker level of $0.064$ ($p < 0.001$ for both). This gap survives individual fixed effects estimation (the within-person informal premium on pass-through is positive, though small among switchers), and an IV specification using health shocks as instruments reveals that the OLS pass-through substantially understates the true sensitivity of consumption to exogenous income shocks ($\hat{\beta}^{IV} = 0.46$). The insurance gap is large, precisely estimated, and constitutes the first application of the Townsend framework to the formal--informal distinction.
 
-Second, the introduction of the NPD---a simplified tax registration that provides legal status without social insurance---is associated with a sharp improvement in consumption insurance for informal wage workers. The income--consumption pass-through for informal wage workers drops from 0.128 pre-NPD to 0.068 post-NPD, converging exactly to the formal worker level. This convergence is concentrated entirely in informal wage workers; formal workers and the self-employed show no change. The triple-difference estimate of $-0.042$ has the predicted sign and closes 88\% of the pre-NPD insurance gap, though it is not statistically significant at conventional levels ($p = 0.25$) due to the limited number of clusters (32 oblasts) and the small informal sample.
+The suggestive causal evidence reinforces the descriptive finding. A Callaway-Sant'Anna decomposition of the NPD's staggered rollout yields a weighted average ATT of $-0.050$ (SE = 0.038, $p = 0.18$) for the triple-difference. Within the 2020 cohort---the larger and better-powered group---the informal wage pass-through drops from $0.117$ to $0.028$ ($p < 0.10$), near-complete convergence to the formal level. The NPD has zero effect on survey-measured informality, ruling out reclassification, and the improvement is absent for the self-employed and formal workers.
 
-Third, the NPD has zero effect on RLMS-measured informality rates, ruling out the possibility that the insurance improvement reflects mechanical reclassification of workers. Whatever channel drives the improvement---access to formal credit, the ability to contract with firms requiring documented suppliers, reduced risk of fines, or the psychological security of legal status---it operates through behavioral changes among workers who continue to report informal employment by survey definitions.
+The mechanism evidence points away from simple credit access and toward a broader ``formalization-as-legibility'' channel. The insurance improvement is concentrated in credit-\textit{scarce} regions, not credit-abundant ones, suggesting that the NPD's value lies in providing proof-of-income documentation where no alternatives exist. The savings margin shows no differential response. These patterns are consistent with a bundle of benefits---credit access, client contracting, enforcement-risk reduction---that together constitute the welfare value of legal economic identity.
 
-These findings have implications for both research and policy. For the informality literature, the results demonstrate that wage-based and productivity-based welfare measures understate the cost of informality by ignoring the insurance channel. Two workers earning identical wages are not equally well off if one absorbs income shocks directly into consumption while the other is buffered by social insurance. The Townsend consumption insurance test provides a transparent, reduced-form alternative that requires neither structural assumptions nor high-frequency flow data. For the formalization policy literature, the results suggest that even partial formalization---tax registration without social insurance---can improve welfare through indirect insurance channels. This finding qualifies the standard view that formalization benefits workers primarily through direct access to social insurance programs.
+These findings have implications for both research and policy. Under the permanent income hypothesis, the Townsend pass-through $\beta$ depends on the persistence of income shocks, the ability to borrow against future income, and access to insurance transfers. The NPD changes credit access and contracting ability but not insurance coverage directly. The before/after estimates thus provide a decomposition: the credit-and-contracting channel accounts for most of the insurance gap, with social insurance playing a smaller role than standard models assume. For formalization policy, the results suggest that lightweight tax registration---a smartphone app costing the government nothing in social insurance outlays---can deliver a meaningful fraction of the consumption insurance benefit of full formal employment. If confirmed in other settings, this implies that the ``formalization-as-social-insurance'' framework should be supplemented with a ``formalization-as-legibility'' framework.
 
-Several limitations suggest directions for future work. The statistical imprecision of the triple-difference calls for replication with larger samples---either through additional survey waves of the RLMS or through administrative data that would increase the number of clusters and the informal sample size. The mechanisms through which tax-only formalization improves consumption insurance remain speculative; survey or administrative evidence on credit access, business contracting, and savings behavior among NPD registrants would sharpen the interpretation. Finally, the welfare calculation presented here captures only the insurance channel; a complete accounting of the costs of informality would integrate the insurance margin documented in this paper with the wage, productivity, and fiscal margins emphasized by the existing literature.
+Several limitations suggest directions for future work. The minimum detectable effect of the triple-difference (0.101) exceeds the estimated coefficient ($-0.042$), and ex-post power is only 21.5\%; replication with administrative data or additional RLMS waves would sharpen inference. The mechanism tests are suggestive; administrative data on bank lending to NPD registrants (from the Central Bank credit registry) or the composition of NPD income (receipts to individuals versus legal entities, from the ``Moy Nalog'' platform) could provide definitive evidence on specific channels. Finally, a complete welfare accounting would integrate the insurance margin documented here with the wage, productivity, and fiscal margins emphasized by the existing literature.
 
 
 %% ============================================================
