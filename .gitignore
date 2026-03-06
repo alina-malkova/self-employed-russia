@@ -1,0 +1,22 @@
+# Large data files
+data/cleaned/*.pkl
+data/cleaned/*.csv
+data/RLMS_*.dta
+data/rlms_panel_broken_inst.csv
+data/rmsp_monthly_xlsx/
+
+# LaTeX build artifacts
+drafts/*.aux
+drafts/*.bbl
+drafts/*.blg
+drafts/*.log
+drafts/*.out
+drafts/*.pdf
+drafts/*.synctex.gz
+
+# Python
+__pycache__/
+*.pyc
+
+# OS
+.DS_Store

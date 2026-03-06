@@ -1,0 +1,17 @@
+metric,value,period,source
+total_registered_self_employed,13021255,2025-03-31,konsol.pro/FNS
+total_physical_persons,12374825,2025-03-31,konsol.pro/FNS
+total_individual_entrepreneurs,646430,2025-03-31,konsol.pro/FNS
+total_registered_self_employed,13800000,2025-06-30,konsol.pro (approx)
+total_payments_rub_billion,245,2025-06-01,konsol.pro/FNS
+payments_from_individuals_rub_billion,129,2025-06-01,konsol.pro/FNS
+payments_from_legal_entities_rub_billion,119,2025-06-01,konsol.pro/FNS
+npd_tax_paid_rub_billion,63.2,2023,konsol.pro/FNS
+npd_tax_paid_rub_billion,99.8,2024,konsol.pro/FNS
+npd_tax_paid_rub_billion,10.9,2025-06-01,konsol.pro/FNS
+new_registrations,472000,2025-06-01,konsol.pro
+deregistrations,169480,2025-06-01,konsol.pro
+checks_from_individuals_million,188,2025-06-01,konsol.pro
+avg_check_from_individuals_rub,688,2025-06-01,konsol.pro
+checks_from_legal_entities_million,24,2025-06-01,konsol.pro
+avg_check_from_legal_entities_rub,4826,2025-06-01,konsol.pro
