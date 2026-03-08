@@ -247,7 +247,7 @@ Pre-NPD: informal consistently above formal (except t−1, t−2). Post-NPD: gap
 
 ### Power and Limitations
 
-1. **32 clusters** (oblasts) — tight constraint for clustered inference. Wild cluster bootstrap recommended for robustness.
+1. **32 clusters** (oblasts) — tight constraint for clustered inference. Wild cluster bootstrap (9,999 reps, Rademacher weights) yields p=0.51 for triple-diff and p=0.50 for by-type, confirming conventional clustered SEs (p=0.25, p=0.16) are somewhat optimistic.
 2. **NPD cohort structure**: RLMS maps to only 2 effective NPD cohorts (2019: 4 oblasts; 2020: 28 oblasts). Limited cross-cohort variation vs. the 8 actual cohorts.
 3. **Informal sample size**: ~4,100 informal wage workers in the Townsend sample. The economically meaningful −0.042 triple-diff requires ~2× sample for significance at 5%.
 4. **Consumption measurement**: HH-level (shared within household), not individual. All members of same HH have identical consumption growth.

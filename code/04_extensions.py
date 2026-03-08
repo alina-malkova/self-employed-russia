@@ -7,6 +7,7 @@ Methodological extensions addressing referee concerns:
 3. Callaway-Sant'Anna with two explicit cohorts (table stakes for top journals)
 4. Mechanism tests (banking heterogeneity, savings DiD, NPD intensity)
 5. Power analysis and MDE calculations
+6. Wild cluster bootstrap (Cameron, Gelbach, Miller 2008) for inference with 32 clusters
 
 Requires:
   - data/cleaned/rlms_informality_panel.pkl (from 01_clean_rlms.py)
@@ -1014,6 +1015,230 @@ def power_analysis(df):
 
 
 # ============================================================
+# 6. WILD CLUSTER BOOTSTRAP
+# ============================================================
+
+def wild_cluster_bootstrap(df):
+    """
+    Wild cluster bootstrap p-values for the Townsend DiD coefficients.
+
+    With only 32 clusters, standard clustered SEs may be unreliable
+    (Cameron, Gelbach, Miller 2008). We compute bootstrap p-values using
+    Rademacher weights (+/- 1 with equal probability) assigned at the
+    cluster level.
+
+    Approach (unrestricted residuals):
+      1. Estimate the full model, record t-statistic for the tested variable.
+      2. For each of B=9,999 bootstrap replications:
+         a. Draw Rademacher weights w_g in {-1, +1} for each cluster g.
+         b. Multiply residuals by cluster weights: e*_i = w_{g(i)} * e_i.
+         c. Construct pseudo-outcome: y*_i = X_i @ beta_hat + e*_i.
+         d. Re-estimate OLS on (y*, X), get bootstrap t-statistic t*_b.
+      3. Bootstrap p-value = fraction of |t*_b| >= |t_observed|.
+
+    Two tests:
+      (A) Triple-diff: beta on dw_x_informal_x_post (H0: beta4 = 0)
+      (B) By-type (informal wage only): beta on dw_x_post (H0 = 0)
+    """
+    print("\n" + "=" * 60)
+    print("EXTENSION 6: Wild Cluster Bootstrap")
+    print("=" * 60)
+
+    B = 9_999  # bootstrap replications
+    np.random.seed(20260308)
+
+    # ---- Prepare sample (same as main triple-diff) ----
+    sample = df[df['emp_type'].isin(['formal_wage', 'informal_wage', 'self_employed'])].copy()
+    sample = sample.dropna(subset=['consumption_growth', 'wage_growth',
+                                    'is_informal', 'post_npd_int', 'ter'])
+
+    year_dummies = pd.get_dummies(sample['year'], prefix='yr', drop_first=True, dtype=float)
+    sample = pd.concat([sample, year_dummies], axis=1)
+    yr_cols = list(year_dummies.columns)
+
+    results_list = []
+
+    # ==================================================================
+    # (A) Triple-difference: test beta on dw_x_informal_x_post
+    # ==================================================================
+    print("\n--- 6a: Triple-diff (dw_x_informal_x_post) ---")
+
+    X_vars_a = ['wage_growth', 'dw_x_informal', 'dw_x_post',
+                'dw_x_informal_x_post',
+                'is_informal', 'post_npd_int', 'informal_x_post'] + yr_cols
+    X_a = sm.add_constant(sample[X_vars_a]).values.astype(np.float64)
+    y_a = sample['consumption_growth'].values.astype(np.float64)
+    clusters_a = sample['ter'].values
+
+    # Column index of the tested variable in X_a
+    col_names_a = ['const'] + X_vars_a
+    test_idx_a = col_names_a.index('dw_x_informal_x_post')
+
+    # Original estimation
+    mod_a = sm.OLS(y_a, X_a).fit(cov_type='cluster', cov_kwds={'groups': clusters_a})
+    beta_hat_a = mod_a.params
+    t_obs_a = mod_a.tvalues[test_idx_a]
+    resid_a = mod_a.resid
+
+    print(f"  Original estimate: beta = {beta_hat_a[test_idx_a]:.4f}, "
+          f"SE = {mod_a.bse[test_idx_a]:.4f}, t = {t_obs_a:.3f}")
+
+    # Cluster-level setup
+    unique_clusters_a = np.unique(clusters_a)
+    n_clusters_a = len(unique_clusters_a)
+    # Build integer cluster index for fast vectorized weight expansion
+    cluster_idx_a = np.empty(len(y_a), dtype=int)
+    for j, c in enumerate(unique_clusters_a):
+        cluster_idx_a[clusters_a == c] = j
+    # Pre-compute per-cluster X slices for sandwich estimator
+    X_by_cluster_a = [X_a[clusters_a == c] for c in unique_clusters_a]
+
+    # Fitted values under unrestricted model
+    Xb_a = X_a @ beta_hat_a
+
+    # Pre-compute (X'X)^{-1} X' for OLS coefficient extraction
+    XtX_inv_Xt_a = np.linalg.solve(X_a.T @ X_a, X_a.T)
+    k_a = X_a.shape[1]
+    N_a = len(y_a)
+    correction_a = (n_clusters_a / (n_clusters_a - 1)) * ((N_a - 1) / (N_a - k_a))
+    XtX_inv_a = np.linalg.solve(X_a.T @ X_a, np.eye(k_a))
+
+    print(f"  Running {B:,} bootstrap replications ({n_clusters_a} clusters)...")
+
+    # Bootstrap (vectorized weight expansion via integer indexing)
+    t_boot_a = np.empty(B)
+    for b in range(B):
+        weights = np.random.choice([-1.0, 1.0], size=n_clusters_a)
+        w = weights[cluster_idx_a]
+
+        y_star = Xb_a + w * resid_a
+        beta_star = XtX_inv_Xt_a @ y_star
+        resid_star = y_star - X_a @ beta_star
+
+        # Clustered SE via pre-split X blocks
+        meat = np.zeros((k_a, k_a))
+        for j in range(n_clusters_a):
+            Xg = X_by_cluster_a[j]
+            eg = resid_star[clusters_a == unique_clusters_a[j]]
+            score_g = Xg.T @ eg
+            meat += np.outer(score_g, score_g)
+
+        V_cl = correction_a * XtX_inv_a @ meat @ XtX_inv_a
+        se_star = np.sqrt(V_cl[test_idx_a, test_idx_a])
+
+        t_boot_a[b] = beta_star[test_idx_a] / se_star if se_star > 0 else 0.0
+
+    # Bootstrap p-value (two-sided)
+    p_boot_a = np.mean(np.abs(t_boot_a) >= np.abs(t_obs_a))
+
+    print(f"  Bootstrap p-value: {p_boot_a:.4f}")
+    print(f"  (Conventional p-value: {mod_a.pvalues[test_idx_a]:.4f})")
+    print(f"  |t_obs| = {np.abs(t_obs_a):.3f}, "
+          f"median |t*| = {np.median(np.abs(t_boot_a)):.3f}, "
+          f"95th pct |t*| = {np.percentile(np.abs(t_boot_a), 95):.3f}")
+
+    results_list.append({
+        'specification': 'triple_diff',
+        'tested_variable': 'dw_x_informal_x_post',
+        'beta': beta_hat_a[test_idx_a],
+        'se_clustered': mod_a.bse[test_idx_a],
+        't_observed': t_obs_a,
+        'p_conventional': mod_a.pvalues[test_idx_a],
+        'p_wild_cluster_bootstrap': p_boot_a,
+        'n_obs': int(len(y_a)),
+        'n_clusters': n_clusters_a,
+        'n_bootstrap': B,
+    })
+
+    # ==================================================================
+    # (B) By-type: informal wage only, test beta on dw_x_post
+    # ==================================================================
+    print("\n--- 6b: Informal wage only (dw_x_post) ---")
+
+    inf_sample = sample[sample['emp_type'] == 'informal_wage'].copy()
+    X_vars_b = ['wage_growth', 'dw_x_post', 'post_npd_int'] + yr_cols
+    X_b = sm.add_constant(inf_sample[X_vars_b]).values.astype(np.float64)
+    y_b = inf_sample['consumption_growth'].values.astype(np.float64)
+    clusters_b = inf_sample['ter'].values
+
+    col_names_b = ['const'] + X_vars_b
+    test_idx_b = col_names_b.index('dw_x_post')
+
+    mod_b = sm.OLS(y_b, X_b).fit(cov_type='cluster', cov_kwds={'groups': clusters_b})
+    beta_hat_b = mod_b.params
+    t_obs_b = mod_b.tvalues[test_idx_b]
+    resid_b = mod_b.resid
+
+    print(f"  Original estimate: beta = {beta_hat_b[test_idx_b]:.4f}, "
+          f"SE = {mod_b.bse[test_idx_b]:.4f}, t = {t_obs_b:.3f}")
+
+    unique_clusters_b = np.unique(clusters_b)
+    n_clusters_b = len(unique_clusters_b)
+    cluster_idx_b = np.empty(len(y_b), dtype=int)
+    for j, c in enumerate(unique_clusters_b):
+        cluster_idx_b[clusters_b == c] = j
+    X_by_cluster_b = [X_b[clusters_b == c] for c in unique_clusters_b]
+
+    Xb_b = X_b @ beta_hat_b
+    XtX_inv_Xt_b = np.linalg.solve(X_b.T @ X_b, X_b.T)
+    k_b = X_b.shape[1]
+    N_b = len(y_b)
+    correction_b = (n_clusters_b / (n_clusters_b - 1)) * ((N_b - 1) / (N_b - k_b))
+    XtX_inv_b = np.linalg.solve(X_b.T @ X_b, np.eye(k_b))
+
+    print(f"  Running {B:,} bootstrap replications ({n_clusters_b} clusters)...")
+
+    t_boot_b = np.empty(B)
+    for b in range(B):
+        weights = np.random.choice([-1.0, 1.0], size=n_clusters_b)
+        w = weights[cluster_idx_b]
+
+        y_star = Xb_b + w * resid_b
+        beta_star = XtX_inv_Xt_b @ y_star
+        resid_star = y_star - X_b @ beta_star
+
+        meat = np.zeros((k_b, k_b))
+        for j in range(n_clusters_b):
+            Xg = X_by_cluster_b[j]
+            eg = resid_star[clusters_b == unique_clusters_b[j]]
+            score_g = Xg.T @ eg
+            meat += np.outer(score_g, score_g)
+
+        V_cl = correction_b * XtX_inv_b @ meat @ XtX_inv_b
+        se_star = np.sqrt(V_cl[test_idx_b, test_idx_b])
+
+        t_boot_b[b] = beta_star[test_idx_b] / se_star if se_star > 0 else 0.0
+
+    p_boot_b = np.mean(np.abs(t_boot_b) >= np.abs(t_obs_b))
+
+    print(f"  Bootstrap p-value: {p_boot_b:.4f}")
+    print(f"  (Conventional p-value: {mod_b.pvalues[test_idx_b]:.4f})")
+    print(f"  |t_obs| = {np.abs(t_obs_b):.3f}, "
+          f"median |t*| = {np.median(np.abs(t_boot_b)):.3f}, "
+          f"95th pct |t*| = {np.percentile(np.abs(t_boot_b), 95):.3f}")
+
+    results_list.append({
+        'specification': 'informal_wage_only',
+        'tested_variable': 'dw_x_post',
+        'beta': beta_hat_b[test_idx_b],
+        'se_clustered': mod_b.bse[test_idx_b],
+        't_observed': t_obs_b,
+        'p_conventional': mod_b.pvalues[test_idx_b],
+        'p_wild_cluster_bootstrap': p_boot_b,
+        'n_obs': int(len(y_b)),
+        'n_clusters': n_clusters_b,
+        'n_bootstrap': B,
+    })
+
+    # ---- Save ----
+    results_df = pd.DataFrame(results_list)
+    results_df.to_csv(os.path.join(TABLE_DIR, 'wild_cluster_bootstrap.csv'), index=False)
+    print(f"\n  Saved: {TABLE_DIR}/wild_cluster_bootstrap.csv")
+
+    return results_df
+
+
+# ============================================================
 # MAIN
 # ============================================================
 
@@ -1047,6 +1272,9 @@ def main():
     # 5. Power analysis
     power_results = power_analysis(df)
 
+    # 6. Wild cluster bootstrap
+    wcb_results = wild_cluster_bootstrap(df)
+
     print("\n" + "=" * 70)
     print("ALL EXTENSIONS COMPLETE")
     print("=" * 70)
@@ -1057,6 +1285,7 @@ def main():
     print("  - mechanism_banking_results.csv")
     print("  - mechanism_savings_results.csv")
     print("  - power_analysis.csv")
+    print("  - wild_cluster_bootstrap.csv")
 
 
 if __name__ == '__main__':

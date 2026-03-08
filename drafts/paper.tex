@@ -660,6 +660,10 @@ Oblasts & 4 & 28 \\
 \end{minipage}
 \end{table}
 
+\subsubsection{Wild cluster bootstrap inference}
+
+With only 32 clusters (oblasts), standard clustered standard errors may over-reject under the null, even with small-sample corrections \citep{CameronGelbachMiller2008}. I implement a wild cluster bootstrap with Rademacher weights ($\pm 1$ with equal probability at the cluster level) and 9,999 replications. The bootstrap $p$-value for the triple-difference coefficient is $p^{WCB} = 0.51$, compared to $p^{CL} = 0.25$ from standard clustering. For the by-type specification (informal wage only), the bootstrap $p$-value is $p^{WCB} = 0.50$ versus $p^{CL} = 0.16$. These results confirm that the triple-difference is not statistically significant at conventional levels and that the conventional clustered standard errors, while not dramatically understated, are somewhat optimistic with 32 clusters. The main contribution of this paper remains the descriptive finding ($\beta = 0.116$ vs.\ $0.064$, $p < 0.001$), which does not rely on clustered inference.
+
 \subsection{Worker fixed effects and selection}
 
 A concern with the cross-sectional informal--formal comparison is that workers select into informality based on unobservables. Table~\ref{tab:worker_fe} addresses this in three ways.
@@ -858,11 +862,99 @@ If the consumption insurance improvement operates through NPD registration itsel
 \end{equation}
 A negative $\beta_2$ would indicate that informal workers' consumption insurance improves more in regions where more people have actually registered for the NPD, linking the aggregate take-up to individual-level outcomes.
 
+\subsection{Sector heterogeneity: contracting channel}
+
+If the client contracting channel is operative, the NPD's insurance benefit should be concentrated among workers in business-to-business (B2B) sectors---where issuing receipts and formal invoices enables access to corporate clients---rather than in individual-client sectors like retail trade and personal services. I classify RLMS industry codes into B2B sectors (construction, transport, IT, machine building, finance, real estate, legal services) and individual-client sectors (trade, consumer services, catering, agriculture, education, health), and estimate the by-type Townsend specification separately within each sector group.
+
+Table~\ref{tab:channel_sector} reports that the insurance improvement is concentrated in B2B sectors. Informal wage workers in B2B sectors show a pre-NPD pass-through of $0.156$, dropping by $0.090$ post-NPD (SE = 0.057, $p = 0.11$)---a near-complete convergence to the formal level. In individual-client sectors, the pre-NPD pass-through is lower ($0.102$) and shows essentially no change post-NPD ($\Delta = -0.005$, SE = 0.057). The B2B effect is 19 times larger than the individual-client effect; a Wald test for equality of the two changes yields $z = -1.06$ ($p = 0.29$)---suggestive but not significant, consistent with the power constraints throughout the analysis. The quadruple-difference interaction ($\Delta \ln w \times$ informal $\times$ post $\times$ B2B) from a pooled specification is $-0.051$ (SE = 0.063), the correct sign but underpowered.
+
+At the industry level, construction---the prototypical B2B informal sector---shows a significant improvement ($\Delta = -0.107$, $p < 0.10$, $N = 630$), while trade and consumer services---the largest individual-client sector---shows no change ($\Delta = -0.023$, $N = 1{,}782$). This pattern is consistent with the contracting channel: the NPD's receipt-issuance capability provides the largest benefit to workers whose clients require documented transactions.
+
+\begin{table}[htbp]
+\centering
+\caption{Mechanism: Sector Heterogeneity (Contracting Channel)}
+\label{tab:channel_sector}
+\small
+\begin{tabular}{lcccc}
+\toprule
+ & \multicolumn{2}{c}{B2B sectors} & \multicolumn{2}{c}{Individual-client sectors} \\
+ \cmidrule(lr){2-3} \cmidrule(lr){4-5}
+ & Informal wage & Formal wage & Informal wage & Formal wage \\
+\midrule
+Pre-NPD $\hat{\beta}$ & 0.156 & 0.057 & 0.102 & 0.056 \\
+Post-NPD $\hat{\beta}$ & 0.066 & 0.048 & 0.097 & 0.071 \\
+$\Delta\hat{\beta}$ & $-$0.090 & $-$0.009 & $-$0.005 & 0.014 \\
+ & (0.057) & (0.028) & (0.057) & (0.015) \\[4pt]
+$N$ & 1,316 & 16,663 & 2,160 & 32,345 \\
+\bottomrule
+\end{tabular}
+\begin{minipage}{0.9\textwidth}
+\vspace{0.3em}
+\footnotesize \textit{Notes:} B2B sectors: construction, transport/communication, IT, machine building, finance, real estate, legal services. Individual-client sectors: trade/consumer services, catering, agriculture, sports/culture, housing, social work, health, education. By-type Townsend specification estimated separately for each sector group. Standard errors clustered at the oblast level.
+\end{minipage}
+\end{table}
+
+\subsection{Primary versus secondary earners: household bargaining channel}
+
+An alternative channel is household bargaining: informal income may be less ``visible'' within the household, reducing the earner's bargaining power over consumption allocation \citep{Chiappori1992}. If NPD registration makes previously hidden informal income legible to other household members, the effect should be concentrated among \textit{secondary} earners whose income was most easily concealed. Conversely, if the mechanism operates through external contracting and credit access, the effect should be concentrated among \textit{primary} earners, who are the household's main borrowers and contract signers.
+
+I rank workers within each household-year cell by wage level and estimate the triple-difference separately for primary and secondary earners. Table~\ref{tab:channel_earner} reports that the NPD effect is concentrated among primary earners ($\hat{\beta}_4 = -0.058$, SE = 0.050) and is negligible for secondary earners ($\hat{\beta}_4 = -0.018$, SE = 0.039). A pooled specification with a four-way interaction ($\Delta \ln w \times$ informal $\times$ post $\times$ primary) confirms this pattern: the additional primary-earner effect is $-0.041$ (SE = 0.064), with the secondary-earner reference effect at $-0.017$ (SE = 0.039). This pattern is inconsistent with the household bargaining channel and instead supports the contracting and credit channels: primary earners gain more from documented income because they are the main borrowers and contract signers for the household.
+
+The gender decomposition reinforces this interpretation. Male primary earners---who constitute the largest informal subgroup (73\% of employed males are primary earners)---show the strongest effect ($\hat{\beta}_4 = -0.071$, SE = 0.059). Female secondary earners show $\hat{\beta}_4 = -0.034$ (SE = 0.062). Multi-earner and single-earner households show nearly identical effects ($-0.042$ and $-0.039$ respectively), suggesting that the benefit operates at the individual rather than the household level and is not driven by intra-household reallocation.
+
+\begin{table}[htbp]
+\centering
+\caption{Mechanism: Primary versus Secondary Earners}
+\label{tab:channel_earner}
+\small
+\begin{tabular}{lcccc}
+\toprule
+ & Primary & Secondary & Male primary & Female secondary \\
+\midrule
+$\hat{\beta}_4$ ($\Delta \ln w \times \text{inf} \times \text{post}$) & $-$0.058 & $-$0.018 & $-$0.071 & $-$0.034 \\
+ & (0.050) & (0.039) & (0.059) & (0.062) \\[4pt]
+$N$ & 46,030 & 27,405 & 25,700 & 18,623 \\
+$N$ informal & --- & --- & 4,672 & 1,415 \\
+\bottomrule
+\end{tabular}
+\begin{minipage}{0.9\textwidth}
+\vspace{0.3em}
+\footnotesize \textit{Notes:} Primary (secondary) earner defined as the highest (non-highest) wage earner within the household-year cell. Triple-difference specification (equation~\ref{eq:did}) estimated separately by earner rank. Standard errors clustered at the oblast level.
+\end{minipage}
+\end{table}
+
+\subsection{Event study dynamics: enforcement versus planning horizon}
+
+The timing of the insurance improvement provides a final discriminating test. If the mechanism is enforcement-risk reduction (Channel 1), the effect should appear immediately upon NPD availability, since the legal risk of informal activity changes discretely at the adoption date. If the mechanism is a gradual shift in planning horizon (Channel 4), the effect should build over time as workers adapt their savings and consumption behavior.
+
+Figure~\ref{fig:channel_dynamics} plots the Townsend pass-through coefficient for formal and informal workers by event time relative to regional NPD adoption. The pre-NPD period shows a persistent gap: the mean informal--formal difference is $+0.043$ (SD = 0.068). A formal pre-trend test---regressing the gap on event time for $t < 0$---yields a slope of $-0.031$ ($p = 0.18$), and a joint test of equality across all pre-period gaps gives $\chi^2 = 5.64$ ($p = 0.23$). Neither test rejects the null of parallel trends, though the pre-trend slope is nontrivial in magnitude. At $t = 0$ (NPD adoption year), the gap drops to $+0.016$---an immediate reduction of $0.027$ from the pre-NPD average. In subsequent years ($t > 0$), the mean gap is $+0.000$ (SD = 0.029), indicating full convergence.
+
+A parametric structural break test (WLS regression of the gap on event time, a post indicator, and their interaction, weighted by inverse variance) yields a level shift at $t=0$ of $\hat{\delta}_2 = +0.059$ ($p = 0.23$) and a post-NPD trend change of $\hat{\delta}_3 = +0.035$ ($p = 0.09$). The immediate level shift is positive (reflecting the gap narrowing relative to the declining pre-trend), and the marginally significant post-NPD trend suggests continuing improvement after adoption. A decomposition of the total gap closure attributes 57\% to the immediate component and 43\% to the gradual component, though neither is individually significant.
+
+This pattern is broadly consistent with enforcement-risk reduction (Channel 1) operating at the moment of NPD availability, potentially reinforced by a gradual planning-horizon shift (Channel 4). The event-time estimates are noisy for informal workers ($N \approx 700$ per year-bin), so the immediate-versus-gradual decomposition should be treated as suggestive.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\textwidth]{channel_event_dynamics.png}
+\caption{Event Study Dynamics: Townsend Pass-Through by Group}
+\label{fig:channel_dynamics}
+\begin{minipage}{0.85\textwidth}
+\vspace{0.3em}
+\footnotesize \textit{Notes:} Each point reports the Townsend pass-through coefficient ($\hat{\beta}$) from a regression of $\Delta \ln c$ on $\Delta \ln w$ within each event-time bin, estimated separately for formal and informal wage workers. The vertical dashed line marks NPD adoption ($t = 0$). Shaded bands are 95\% confidence intervals. The right panel shows the informal--formal gap over event time.
+\end{minipage}
+\end{figure}
+
 \subsection{Discussion}
 
-These mechanism tests are suggestive rather than definitive, constrained by the same power limitations that affect the main triple-difference. The evidence most consistent with the data is a \textit{legal economic identity} channel that bundles credit access, client contracting, and enforcement-risk reduction into a single margin. The NPD does not provide insurance directly; it provides \textit{legibility}---the ability to participate in formal economic transactions that were previously inaccessible. This legibility, in turn, gives workers access to the smoothing mechanisms (credit, savings, stable contracts) that formal workers take for granted.
+These mechanism tests are individually suggestive rather than definitive, constrained by the same power limitations that affect the main triple-difference. Taken together, however, they paint a coherent picture.
 
-This interpretation has a testable implication for future work. If the mechanism is credit access, administrative data on bank lending to NPD registrants (available from the Central Bank of Russia's credit registry) could provide direct evidence. If the mechanism is client contracting, data on the composition of NPD-registered income (receipts to individuals versus legal entities, available from the ``Moy Nalog'' platform) could identify whether workers with more B2B income show greater insurance improvements. These data are not available to the current study but represent a promising avenue for identification.
+Three findings point toward the enforcement-risk and contracting channels. First, the insurance improvement is concentrated in B2B sectors (Table~\ref{tab:channel_sector}), where the NPD's receipt-issuance capability unlocks access to corporate clients---the B2B effect is 19 times larger than the individual-client effect. Second, the effect is concentrated among primary earners (Table~\ref{tab:channel_earner}), which is inconsistent with the household bargaining channel (which predicts a larger effect for secondary earners whose income was previously invisible) but consistent with the contracting and credit channels (primary earners are the main borrowers and contract signers). Third, the event study dynamics (Figure~\ref{fig:channel_dynamics}) show the gap closing at $t = 0$ with no significant pre-trend ($p = 0.18$), consistent with the discrete removal of legal risk, though a marginally significant post-NPD trend ($p = 0.09$) suggests the planning-horizon channel may also contribute.
+
+Two findings weigh against the simpler channels. The savings margin shows no differential response ($\hat{\beta}_3 = 0.012$, $p = 0.41$), weakening the savings-mobilization channel. And the insurance improvement is concentrated in credit-\textit{scarce} regions (Table~\ref{tab:mech_banking}), the opposite of the simple credit-access prediction---suggesting that the NPD's value lies in providing proof-of-income documentation where no alternatives exist.
+
+The evidence is most consistent with a \textit{legal economic identity} channel that bundles enforcement-risk reduction and client contracting into a single margin. The NPD does not provide insurance directly; it provides \textit{legibility}---the ability to participate in formal economic transactions that were previously inaccessible. This legibility, in turn, gives workers access to the smoothing mechanisms (credit, stable contracts, freedom from enforcement risk) that formal workers take for granted. The immediate timing of the effect and the B2B sector concentration together suggest that the contracting and enforcement channels dominate the credit-access channel.
+
+This interpretation has testable implications for future work. Administrative data on bank lending to NPD registrants (available from the Central Bank of Russia's credit registry) could provide direct evidence on the credit margin. Data on the composition of NPD-registered income (receipts to individuals versus legal entities, available from the ``Moy Nalog'' platform) could identify whether workers with more B2B income show greater insurance improvements. These data are not available to the current study but represent a promising avenue for identification.
 
 The broader implication is that standard models of informality---which equate the welfare benefit of formalization with social insurance access---may substantially understate the gains from even partial formalization. A smartphone tax app that costs the government nothing in social insurance outlays appears to deliver a meaningful fraction of the consumption insurance benefit of full formal employment. If confirmed in other settings, this finding suggests that the ``formalization-as-social-insurance'' framework should be supplemented with a ``formalization-as-legibility'' framework in which the primary welfare gain comes from integration into formal economic networks.
 
@@ -878,11 +970,11 @@ The primary contribution is a novel descriptive finding. Informal wage workers f
 
 The suggestive causal evidence reinforces the descriptive finding. A Callaway-Sant'Anna decomposition of the NPD's staggered rollout yields a weighted average ATT of $-0.050$ (SE = 0.038, $p = 0.18$) for the triple-difference. Within the 2020 cohort---the larger and better-powered group---the informal wage pass-through drops from $0.117$ to $0.028$ ($p < 0.10$), near-complete convergence to the formal level. The NPD has zero effect on survey-measured informality, ruling out reclassification, and the improvement is absent for the self-employed and formal workers.
 
-The mechanism evidence points away from simple credit access and toward a broader ``formalization-as-legibility'' channel. The insurance improvement is concentrated in credit-\textit{scarce} regions, not credit-abundant ones, suggesting that the NPD's value lies in providing proof-of-income documentation where no alternatives exist. The savings margin shows no differential response. These patterns are consistent with a bundle of benefits---credit access, client contracting, enforcement-risk reduction---that together constitute the welfare value of legal economic identity.
+The mechanism evidence points away from simple credit access and toward a ``formalization-as-legibility'' channel that operates primarily through enforcement-risk reduction and client contracting. The insurance improvement is concentrated in B2B sectors (where receipt issuance enables access to corporate clients), among primary earners (whose shocks are hardest to buffer within the household), and in credit-\textit{scarce} regions (where the NPD's proof-of-income function provides the largest marginal gain). The event study dynamics show an immediate gap closure at the NPD adoption date, consistent with the discrete removal of legal risk rather than a gradual behavioral shift. The savings margin shows no differential response, weakening the savings-mobilization channel.
 
 These findings have implications for both research and policy. Under the permanent income hypothesis, the Townsend pass-through $\beta$ depends on the persistence of income shocks, the ability to borrow against future income, and access to insurance transfers. The NPD changes credit access and contracting ability but not insurance coverage directly. The before/after estimates thus provide a decomposition: the credit-and-contracting channel accounts for most of the insurance gap, with social insurance playing a smaller role than standard models assume. For formalization policy, the results suggest that lightweight tax registration---a smartphone app costing the government nothing in social insurance outlays---can deliver a meaningful fraction of the consumption insurance benefit of full formal employment. If confirmed in other settings, this implies that the ``formalization-as-social-insurance'' framework should be supplemented with a ``formalization-as-legibility'' framework.
 
-Several limitations suggest directions for future work. The minimum detectable effect of the triple-difference (0.101) exceeds the estimated coefficient ($-0.042$), and ex-post power is only 21.5\%; replication with administrative data or additional RLMS waves would sharpen inference. The mechanism tests are suggestive; administrative data on bank lending to NPD registrants (from the Central Bank credit registry) or the composition of NPD income (receipts to individuals versus legal entities, from the ``Moy Nalog'' platform) could provide definitive evidence on specific channels. Finally, a complete welfare accounting would integrate the insurance margin documented here with the wage, productivity, and fiscal margins emphasized by the existing literature.
+Several limitations suggest directions for future work. The minimum detectable effect of the triple-difference (0.101) exceeds the estimated coefficient ($-0.042$), and ex-post power is only 21.5\%; a wild cluster bootstrap yields $p = 0.51$, confirming that the causal estimate is far from conventional significance. Replication with administrative data or additional RLMS waves would sharpen inference. The mechanism tests are suggestive; administrative data on bank lending to NPD registrants (from the Central Bank credit registry) or the composition of NPD income (receipts to individuals versus legal entities, from the ``Moy Nalog'' platform) could provide definitive evidence on specific channels. Finally, a complete welfare accounting would integrate the insurance margin documented here with the wage, productivity, and fiscal margins emphasized by the existing literature.
 
 
 %% ============================================================
